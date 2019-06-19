@@ -1,4 +1,5 @@
 import grafo
+import ListaLigada
 import sys
 
 def leer_grafo(file):
