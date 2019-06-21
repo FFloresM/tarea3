@@ -19,15 +19,20 @@ class Nodo():
 class ListaLigada(object):
 	"""docstring for ListaLigada"""
 	def __init__(self):
-		self.head = head
+		self.head = None
 
 	def isEmpty(self):
 		return self.head == None
 
 	def agregar(self, item):
 		temp = Nodo(item)
-		temp.setSig(self.head)
-		self.head = temp
+		if self.isEmpty():			
+			self.head = temp
+		else:
+			actual = self.head
+			while actual.getSig():
+				actual = actual.getSig()
+			actual.setSig(temp)
 
 	def size(self):
 		actual = self.head
@@ -61,3 +66,12 @@ class ListaLigada(object):
 			self.head = actual.getSig()
 		else:
 			prev.setSig(actual.getSig())
+
+	def mostrar(self):
+		actual = self.head
+		while actual != None:
+			print(actual.getDato(), end='')
+			actual = actual.getSig()
+			if actual != None:
+				print(" ->", end=" ")
+		print()
