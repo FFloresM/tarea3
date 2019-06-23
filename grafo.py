@@ -1,12 +1,11 @@
-class Grafo():
+class Grafo:
 	"""Grafo con pesos"""
 	def __init__(self, conj=None):
-		"""conj: conjunto de aristas representadas como (a,b,p)
+		"""conj: conjunto de aristas representadas como (a,b,p) ordenadas por peso.
 			(a,b) en E (conjunto de aristas) y p = peso arista (a,b)"""
 		if conj is None:
-			self.conj = {}
-			self.conj = set(self.conj)
-		self.conj = conj
+			self.conj = set()
+		self.conj = sorted(conj, key = lambda peso: peso[2])
 		self.vertices = None
 		self.aristas = None
 
@@ -24,7 +23,7 @@ class Grafo():
 		if len(tupla) == 3:
 			self.conj.add(tupla)
 		else:
-			print("error")
+			print("largo de tupla debe ser 3")
 
 	def Aristas(self):
 		"""Devuelve el conjunto de aristas E"""

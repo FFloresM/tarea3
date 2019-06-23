@@ -1,4 +1,4 @@
-class Nodo():
+class Nodo:
 	"""Clase nodo"""
 	def __init__(self, dato):
 		self.dato = dato
