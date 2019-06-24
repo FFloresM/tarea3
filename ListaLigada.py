@@ -1,6 +1,6 @@
 class Nodo:
 	"""Clase nodo"""
-	def __init__(self, dato):
+	def __init__(self, dato=None):
 		self.dato = dato
 		self.sig = None
 		self.l_head = None
@@ -16,6 +16,7 @@ class Nodo:
 
 	def setSig(self, newsig):
 		self.sig = newsig
+
 
 class ListaLigada(object):
 	"""docstring for ListaLigada"""

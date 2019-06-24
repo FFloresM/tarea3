@@ -8,31 +8,41 @@ def leer_grafo(file):
 	with open(file, 'r') as file:
 		content = file.read().splitlines()
 	for i in content:
-		g.add(tuple(int(x) for x in i.split()))
+		g.add(tuple(int(x) if x.isdigit() else x for x in i.split()))
 	return g
 #print(sys.argv)
 try:
-	archivo = sys.argv[1]
-	
+	archivo = sys.argv[1]	
 except IndexError:
 	print("ingrese nombre archivo: \n$ python3.x krustal.py nombre_archivo")
 	exit()
 
+try:
+	modo = sys.argv[2]
+except IndexError:
+	print("ingrese modo: \n$ python3.x krustal.py nombre_archivo modo")
+	exit()
+
 g = leer_grafo(archivo)
 grafo = grafo.Grafo(g)
-#print(grafo.conj)
-#print(grafo.Aristas())
 
-lst = List_Set_T()
+if modo == 'arbol':
+	lst = List_Set_T()
+elif modo == 'lista':
+	lst = List_Set()
+else:
+	print("modo no válido")
+	exit()
+#Krustal
 A = set()
 ES = grafo.Aristas()
 for v in grafo.Vertices():
 	lst.makeSet(v)
 
 for u,v in ES:
-	if lst.Buscar(u) != lst.Buscar(v):
+	if lst.find(u) != lst.find(v):
 		A.add((u,v))
-		lst.Union(u, v)
+		lst.union(u, v)
 
 print(A)
 

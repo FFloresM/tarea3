@@ -8,26 +8,37 @@ class List_Set:
 
 	def makeSet(self, x):
 		self.new_set = ListaLigada()
-		temp = Nodo(x)
-		self.new_set.head = temp
+		self.new_set.head = Nodo()
+
 		self.new_set.tail = self.new_set.head
 		self.nodoDir[x] = self.new_set.head
-		temp.l_head = self.new_set
 
-		return self.new_set
+		self.new_set.head.setDato(x)
+		self.new_set.head.l_head = self.new_set
 
-	def union(self, l1, l2):
-		act = l2.head 
-		while act.getSig():
-			act.l_head = l1
+
+	def union(self, x, y):
+		s_x = self.find(x)
+		s_y = self.find(y)
+
+		act = s_y.head
+
+		while act:
+			act.l_head = s_x
 			act = act.getSig()
-		l1.tail.sig = l2.head
-		l1.tail = l2.tail
-		del l2
+
+		s_x.tail.sig = s_y.head
+		s_x.tail = s_y.tail
+
+		del s_y
 
 	def find(self, x):
 		nodo = self.nodoDir[x]
 		return nodo.l_head
+
+	def findv(self, x):
+		nodo = self.nodoDir[x]
+		return nodo.l_head.head.dato
 
 class List_Set_T(object):
 	"""docstring for List_Set_T"""
@@ -39,14 +50,14 @@ class List_Set_T(object):
 		self.padre[x] = x
 		self.rank[x] = 0
 
-	def Buscar(self, x):
+	def find(self, x):
 		if(self.padre[x]!=x):
-			self.padre[x]=self.Buscar(self.padre[x])
+			self.padre[x]=self.find(self.padre[x])
 		return self.padre[x]
 
-	def Union(self, x, y):
-		xRaiz = self.Buscar(x)
-		yRaiz = self.Buscar(y)
+	def union(self, x, y):
+		xRaiz = self.find(x)
+		yRaiz = self.find(y)
 		if(xRaiz == yRaiz):
 			return
 		if self.rank[xRaiz] < self.rank[yRaiz]:
