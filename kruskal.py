@@ -10,7 +10,7 @@ def leer_grafo(file):
 	for i in content:
 		g.add(tuple(int(x) if x.isdigit() else x for x in i.split()))
 	return g
-#print(sys.argv)
+
 try:
 	archivo = sys.argv[1]	
 except IndexError:
@@ -33,6 +33,7 @@ elif modo == 'lista':
 else:
 	print("modo no válido")
 	exit()
+
 #Krustal
 A = set()
 ES = grafo.Aristas()
@@ -43,6 +44,10 @@ for u,v in ES:
 	if lst.find(u) != lst.find(v):
 		A.add((u,v))
 		lst.union(u, v)
-
-print(A)
+##
+print('T:', A)
+w = 0
+for i in A:
+	w += grafo.peso(i)
+print('w(T) = ',w)
 

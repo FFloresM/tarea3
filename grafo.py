@@ -29,8 +29,16 @@ class Grafo:
 
 	def Aristas(self):
 		"""Devuelve el conjunto de aristas E"""
-		edges = []
+		edges = {}
 		for i in self.conj:
-			edges.append((i[0],i[1]))
+			edges[(i[0],i[1])] = i[2]
 		self.aristas = edges
-		return self.aristas
+		return list(self.aristas.keys())
+
+	def peso(self, ar):
+		if ar in self.aristas:
+			return self.aristas[ar]
+
+		
+
+		
