@@ -1,8 +1,14 @@
-from ListaLigada import ListaLigada as LL, Nodo as Nd
+from Union_find import List_Set, List_Set_T
 
-lista = LL()
 
-for i in range(6):
-	lista.agregar(i)
+lst = List_Set_T()
 
-lista.mostrar()
+lst.makeSet(4)
+lst.makeSet(7)
+
+lst.Union(4, 7)
+
+print(lst.Buscar(4))
+print(lst.Buscar(7))
+
+

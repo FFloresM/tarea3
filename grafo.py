@@ -5,7 +5,8 @@ class Grafo:
 			(a,b) en E (conjunto de aristas) y p = peso arista (a,b)"""
 		if conj is None:
 			self.conj = set()
-		self.conj = sorted(conj, key = lambda peso: peso[2])
+		else:
+			self.conj = sorted(conj, key = lambda peso: peso[2])
 		self.vertices = None
 		self.aristas = None
 
@@ -22,6 +23,7 @@ class Grafo:
 		"""Agregar una arista (a,b,p) con vertices a, b y peso p"""
 		if len(tupla) == 3:
 			self.conj.add(tupla)
+			self.conj = sorted(conj, key = lambda peso: peso[2])
 		else:
 			print("largo de tupla debe ser 3")
 
@@ -30,5 +32,5 @@ class Grafo:
 		edges = []
 		for i in self.conj:
 			edges.append((i[0],i[1]))
-		self.aristas = set(edges)
+		self.aristas = edges
 		return self.aristas

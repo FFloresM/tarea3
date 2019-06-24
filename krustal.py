@@ -1,5 +1,6 @@
 import grafo
 import ListaLigada
+from Union_find import List_Set, List_Set_T
 import sys
 
 def leer_grafo(file):
@@ -19,8 +20,19 @@ except IndexError:
 
 g = leer_grafo(archivo)
 grafo = grafo.Grafo(g)
-print(grafo.conj)
-"""
-print(grafo.Vertices())
-print(grafo.Aristas())
-"""
+#print(grafo.conj)
+#print(grafo.Aristas())
+
+lst = List_Set_T()
+A = set()
+ES = grafo.Aristas()
+for v in grafo.Vertices():
+	lst.makeSet(v)
+
+for u,v in ES:
+	if lst.Buscar(u) != lst.Buscar(v):
+		A.add((u,v))
+		lst.Union(u, v)
+
+print(A)
+

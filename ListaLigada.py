@@ -3,6 +3,7 @@ class Nodo:
 	def __init__(self, dato):
 		self.dato = dato
 		self.sig = None
+		self.l_head = None
 
 	def getDato(self):
 		return self.dato
@@ -20,6 +21,7 @@ class ListaLigada(object):
 	"""docstring for ListaLigada"""
 	def __init__(self):
 		self.head = None
+		self.tail = None
 
 	def isEmpty(self):
 		return self.head == None
@@ -28,11 +30,13 @@ class ListaLigada(object):
 		temp = Nodo(item)
 		if self.isEmpty():			
 			self.head = temp
+			self.tail = temp
 		else:
 			actual = self.head
 			while actual.getSig():
 				actual = actual.getSig()
 			actual.setSig(temp)
+			self.tail = actual
 
 	def size(self):
 		actual = self.head
