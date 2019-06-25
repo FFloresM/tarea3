@@ -2,9 +2,10 @@ from ListaLigada import Nodo, ListaLigada
 
 class List_Set:
 	"""Estructura Union-Find usando listas ligadas"""
-	def __init__(self):
+	def __init__(self, h=None):
 		self.nodoDir = dict()
 		self.new_set = None
+		self.h = h
 
 	def makeSet(self, x):
 		self.new_set = ListaLigada()
@@ -16,15 +17,27 @@ class List_Set:
 
 
 	def union(self, x, y):
+		"""Union de x e y. Si h, entonces la lista con menos elementos se agrega al final de la más larga """
 		s_x = self.find(x)
 		s_y = self.find(y)
-		act = s_y.head
+		
+		ls_x = s_x.size()
+		ls_y = s_y.size()
+
+		if self.h and ls_x > ls_y:
+			self.unionh(s_x, s_y)
+		else:
+			self.unionh(s_y,s_x)	
+
+	def unionh(self, l1, l2):
+		"""Une l2 a l1, elimina l2"""
+		act = l2.head
 		while act:
-			act.l_head = s_x
+			act.l_head = l1
 			act = act.getSig()
-		s_x.tail.sig = s_y.head
-		s_x.tail = s_y.tail
-		del s_y
+		l1.tail.sig = l2.head
+		l1.tail = l2.tail
+		del l2
 
 	def find(self, x):
 		nodo = self.nodoDir[x]
@@ -65,16 +78,3 @@ class List_Set_T(object):
 		else:
 			self.padre[y] = x
 			self.rank[x]+=1
-
-		
-	
-
-
-
-
-		
-
-
-
-
-		

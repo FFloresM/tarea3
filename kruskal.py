@@ -23,11 +23,14 @@ except IndexError:
 	print("ingrese modo: \n$ python3.x krustal.py nombre_archivo modo")
 	exit()
 
+
 g = leer_grafo(archivo)
 grafo = grafo.Grafo(g)
 
 if modo == 'arbol':
 	lst = List_Set_T()
+elif modo == 'listah':
+	lst = List_Set(1)
 elif modo == 'lista':
 	lst = List_Set()
 else:
@@ -50,4 +53,5 @@ w = 0
 for i in A:
 	w += grafo.peso(i)
 print('w(T) = ',w)
+
 

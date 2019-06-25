@@ -36,6 +36,7 @@ class Grafo:
 		return list(self.aristas.keys())
 
 	def peso(self, ar):
+		"""Devueve el peso de una arista ar ingresada como par (u,v) en E"""
 		if ar in self.aristas:
 			return self.aristas[ar]
 
