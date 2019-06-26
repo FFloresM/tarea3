@@ -1,17 +1,16 @@
 class Grafo:
-	"""Grafo con pesos"""
+	"""Clase para representar Grafo no dirigido con pesos"""
 	def __init__(self, conj=None):
-		"""conj: conjunto de aristas representadas como (a,b,p) ordenadas por peso.
+		"""conj: conjunto de aristas representadas como (a,b,p).
 			(a,b) en E (conjunto de aristas) y p = peso arista (a,b)"""
 		if conj is None:
-			self.conj = set()
-		else:
-			self.conj = sorted(conj, key = lambda peso: peso[2])
+			self.conj = []
+		self.conj = conj
 		self.vertices = None
 		self.aristas = None
 
 	def Vertices(self):
-		"""Devuelve el conjunto de vértices V"""
+		"""Devuelve el conjunto de vertices V"""
 		v = []
 		for i in self.conj:
 			v.append(i[0])
@@ -22,8 +21,7 @@ class Grafo:
 	def AddEdge(self,tupla):
 		"""Agregar una arista (a,b,p) con vertices a, b y peso p"""
 		if len(tupla) == 3:
-			self.conj.add(tupla)
-			self.conj = sorted(conj, key = lambda peso: peso[2])
+			self.conj.append(tupla)
 		else:
 			print("largo de tupla debe ser 3")
 
@@ -40,6 +38,6 @@ class Grafo:
 		if ar in self.aristas:
 			return self.aristas[ar]
 
-		
-
-		
+	def sort(self):
+		"""ordena las aristas por peso"""
+		self.conj = sorted(self.conj, key = lambda peso: peso[2])

@@ -3,11 +3,13 @@ from ListaLigada import Nodo, ListaLigada
 class List_Set:
 	"""Estructura Union-Find usando listas ligadas"""
 	def __init__(self, h=None):
+		"""si h entonces se hace merge con heuristica """
 		self.nodoDir = dict()
 		self.new_set = None
 		self.h = h
 
 	def makeSet(self, x):
+		""" Crea un nuevo conjunto con unico elelemto x"""
 		self.new_set = ListaLigada()
 		self.new_set.head = Nodo()
 		self.new_set.tail = self.new_set.head
@@ -17,7 +19,7 @@ class List_Set:
 
 
 	def union(self, x, y):
-		"""Union de x e y. Si h, entonces la lista con menos elementos se agrega al final de la más larga """
+		"""Union de x e y. Si h, entonces la lista con menos elementos se agrega al final de la mas larga """
 		s_x = self.find(x)
 		s_y = self.find(y)
 		
@@ -40,35 +42,41 @@ class List_Set:
 		del l2
 
 	def find(self, x):
+		"""Busca x en en la coleccion de conjuntos y retorna un puntero a su representante"""
 		nodo = self.nodoDir[x]
 		return nodo.l_head
 
 	def findv(self, x):
+		""" Busca x en en la coleccion de conjuntos y retorna su representante """
 		nodo = self.nodoDir[x]
 		return nodo.l_head.head.dato
 
 class List_Set_T(object):
-	"""docstring for List_Set_T"""
+	""" Estructura Union-Find usando bosque de arboles """
 	def __init__(self):
 		self.padre = dict()
 		self.rank = dict()
 
 	def makeSet(self,x):
+		""" Crea un nuevo conjunto con unico elelemto x"""
 		self.padre[x] = x
 		self.rank[x] = 0
 
 	def find(self, x):
+		"""Busca x en en la coleccion de conjuntos y retorna su representante"""
 		if(self.padre[x]!=x):
 			self.padre[x]=self.find(self.padre[x])
 		return self.padre[x]
 
 	def union(self, x, y):
+		""" Busca los representantes de x e y y llama a link"""
 		x_raiz = self.find(x)
 		y_raiz = self.find(y)
 		self.link(x_raiz, y_raiz)
 		
 
 	def link(self, x, y):
+		""" La raiz de menor rank se hace apuntar a la de mayor rank """
 		if(x == y):
 			return
 		if self.rank[x] < self.rank[y]:

@@ -4,6 +4,7 @@ from Union_find import List_Set, List_Set_T
 import sys
 
 def leer_grafo(file):
+	""" Lee un un archivo de texto con un grafo representado aristas con peso """
 	g = set()
 	with open(file, 'r') as file:
 		content = file.read().splitlines()
@@ -34,10 +35,11 @@ elif modo == 'listah':
 elif modo == 'lista':
 	lst = List_Set()
 else:
-	print("modo no válido")
+	print("modo no valido")
 	exit()
-
-#Krustal
+#ordena por peso
+grafo.sort()
+#Kruskal
 A = set()
 ES = grafo.Aristas()
 for v in grafo.Vertices():
@@ -47,11 +49,11 @@ for u,v in ES:
 	if lst.find(u) != lst.find(v):
 		A.add((u,v))
 		lst.union(u, v)
-##
+
+
+# Muestra aristas de MST y peso del arbol
 print('T:', A)
 w = 0
 for i in A:
 	w += grafo.peso(i)
 print('w(T) = ',w)
-
-
